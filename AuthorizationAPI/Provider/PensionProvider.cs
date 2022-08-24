@@ -1,13 +1,22 @@
-﻿using AuthorizationAPI.Model;
-using System;
+﻿using AuthorizationAPI.Data;
+using AuthorizationAPI.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace AuthorizationAPI.Provider
 {
     public class PensionProvider : IPensionProvider
     {
+
+        private readonly ApplicationDbContext _db;
+
+        public PensionProvider(ApplicationDbContext db)
+        {
+            _db = db;
+
+        }
+
         private static List<PensionCredentials> List = new List<PensionCredentials>()
         {
             new PensionCredentials{ Username = "Rohit", Password = "Hitman@45"},
@@ -25,10 +34,20 @@ namespace AuthorizationAPI.Provider
             return List;
         }
 
+
+
         public PensionCredentials GetPensioner(PensionCredentials cred)
         {
-            List<PensionCredentials> rList = GetList();
-            PensionCredentials penCred = rList.FirstOrDefault(user => user.Username == cred.Username && user.Password == cred.Password);
+            var user = _db.Credentials.FirstOrDefault(user => user.Username == cred.Username && user.Password == cred.Password);
+
+            PensionCredentials penCred = new PensionCredentials()
+            {
+                Username = user.Username,
+                Password = user.Password
+            };
+
+            //List<PensionCredentials> rList = GetList();
+            //PensionCredentials penCred = rList.FirstOrDefault(user => user.Username == cred.Username && user.Password == cred.Password);
 
             return penCred;
         }

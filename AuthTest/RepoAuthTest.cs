@@ -1,11 +1,8 @@
 ﻿using AuthorizationAPI.Model;
-using AuthorizationAPI.Provider;
 using AuthorizationAPI.Repository;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AuthTest
 {

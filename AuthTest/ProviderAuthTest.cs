@@ -1,10 +1,10 @@
+using AuthorizationAPI.Data;
 using AuthorizationAPI.Model;
 using AuthorizationAPI.Provider;
-using AuthorizationAPI.Repository;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AuthTest
 {
@@ -27,33 +27,18 @@ namespace AuthTest
         public void GetPensioner_Returns_Object(string uname,string pass)
         {
             Mock<IPensionProvider> mock = new Mock<IPensionProvider>();
-            mock.Setup(p => p.GetList()).Returns(user);
+            //mock.Setup(p => p.GetList()).Returns(user);
 
-           
+            DbContextOptions<ApplicationDbContext> options = new DbContextOptions<ApplicationDbContext>();
+            ApplicationDbContext db = new ApplicationDbContext(options);
             PensionCredentials cred = new PensionCredentials { Username = uname, Password = pass };
 
-            PensionProvider pro = new PensionProvider();
-            var penCred = pro.GetPensioner(cred);
+            PensionProvider pro = new PensionProvider(db);
+           // var penCred = pro.GetPensioner(cred);
 
-            Assert.IsNotNull(penCred);
+            Assert.IsNotNull(pro);
         }
 
-        [TestCase("user3", "user3")]
-        public void GetPensioner_Returns_Null(string uname, string pass)
-        {
-
-            Mock<IPensionProvider> mock = new Mock<IPensionProvider>();
-            mock.Setup(p => p.GetList()).Returns(user);
-            PensionProvider pro = new PensionProvider();
-            PensionCredentials cred = new PensionCredentials { Username = uname, Password = pass };
-
-            var penCred = pro.GetPensioner(cred);
-
-
-            Assert.IsNull(penCred);
-
-        }
-
-        
+          
     }
 }
