@@ -28,8 +28,7 @@ namespace AuthTest
                 PensionCredentials cred = new PensionCredentials { Username = uname, Password = pass };
                 Mock<IPensionRepo> mock = new Mock<IPensionRepo>();
                 mock.Setup(p => p.GetPensionerCred(cred)).Returns(user[0]);
-                //PensionProvider pro = new PensionProvider();
-               
+                //PensionProvider pro = new PensionProvider();              
 
                 var penCred = mock.Object.GetPensionerCred(cred);
 
@@ -45,7 +44,6 @@ namespace AuthTest
                 mock.Setup(p => p.GetPensionerCred(cred)).Returns(user[0]);
                 //PensionProvider pro = new PensionProvider();
                
-
                 var penCred = mock.Object.GetPensionerCred(cred);
 
                 Assert.IsNull(penCred);

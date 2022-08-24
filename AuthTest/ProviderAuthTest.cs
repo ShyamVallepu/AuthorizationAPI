@@ -27,14 +27,12 @@ namespace AuthTest
         public void GetPensioner_Returns_Object(string uname,string pass)
         {
             Mock<IPensionProvider> mock = new Mock<IPensionProvider>();
-            //mock.Setup(p => p.GetList()).Returns(user);
 
             DbContextOptions<ApplicationDbContext> options = new DbContextOptions<ApplicationDbContext>();
             ApplicationDbContext db = new ApplicationDbContext(options);
             PensionCredentials cred = new PensionCredentials { Username = uname, Password = pass };
 
             PensionProvider pro = new PensionProvider(db);
-           // var penCred = pro.GetPensioner(cred);
 
             Assert.IsNotNull(pro);
         }

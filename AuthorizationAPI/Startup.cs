@@ -63,7 +63,7 @@ namespace AuthorizationAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Web API", Version = "1.0" });
+                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Authorization API", Version = "1.0" });
             });
         }
 

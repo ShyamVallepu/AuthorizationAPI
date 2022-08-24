@@ -24,7 +24,7 @@ namespace AuthorizationAPI.Controllers
         /// Post method for Login
         /// </summary>
         /// <param name="login"></param>
-        /// <returns></returns>
+        /// <returns> Authnetication Token </returns>
 
         [HttpPost]
         public IActionResult Login([FromBody] PensionCredentials login)
@@ -46,10 +46,6 @@ namespace AuthorizationAPI.Controllers
 
             return response;
         }
-
-        
-  
-        
-        
+       
     }
 }
