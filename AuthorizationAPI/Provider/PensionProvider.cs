@@ -22,13 +22,21 @@ namespace AuthorizationAPI.Provider
         {
             var user = _db.Credentials.FirstOrDefault(user => user.Username == cred.Username && user.Password == cred.Password);
 
-            PensionCredentials penCred = new PensionCredentials()
+            if (user==null)
             {
-                Username = user.Username,
-                Password = user.Password
-            };
+                return null;
+            }
 
-            return penCred;
+            else
+            {
+                PensionCredentials penCred = new PensionCredentials()
+                {
+                    Username = user.Username,
+                    Password = user.Password
+                };
+
+
+           return penCred
         }
     }
 }
